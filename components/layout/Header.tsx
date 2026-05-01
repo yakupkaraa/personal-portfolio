@@ -1,18 +1,24 @@
+"use client";
+
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import dynamic from "next/dynamic";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
 ];
+
+const ThemeToggle = dynamic(
+  () => import("./ThemeToggle").then((mod) => mod.ThemeToggle),
+  { ssr: false }
+);
 
 export default function Header() {
   return (

@@ -1,18 +1,17 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata } from "next"
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
+import { Space_Grotesk, Inter } from "next/font/google";
 
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -30,7 +29,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${spaceGrotesk.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="flex flex-col min-h-screen">
         <ThemeProvider>
