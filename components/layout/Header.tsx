@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -11,8 +12,9 @@ import dynamic from "next/dynamic";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
+  { href: "/skills", label: "Skills" },
   { href: "/projects", label: "Projects" },
+  { href: "/about", label: "About" },
 ];
 
 const ThemeToggle = dynamic(
@@ -21,6 +23,8 @@ const ThemeToggle = dynamic(
 );
 
 export default function Header() {
+  const pathname = usePathname();
+  
   return (
     <header className="sticky top-0 z-50 w-full">
       <div className="mx-4 mt-4">
@@ -35,8 +39,12 @@ export default function Header() {
                 {navLinks.map(({ href, label }) => (
                   <NavigationMenuItem key={href}>
                     <NavigationMenuLink
-                      className="text-muted-foreground hover:text-foreground hover:bg-muted transition-all px-4 py-1.5 rounded-full"
                       href={href}
+                      className={`px-4 py-1.5 rounded-full transition-all text-sm ${
+                        pathname === href
+                          ? "bg-accent text-primary font-semibold"
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      }`}
                     >
                       {label}
                     </NavigationMenuLink>
@@ -52,5 +60,4 @@ export default function Header() {
     </header>
   );
 }
-
 export { Header };
