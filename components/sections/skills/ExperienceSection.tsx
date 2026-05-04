@@ -1,4 +1,4 @@
-import { ArrowDown } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 
 interface Experience {
   period: string;
@@ -9,23 +9,23 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
-    period: "2024 — Present",
+    period: "Oct 2024 — Present",
     title: "Frontend Developer",
-    company: "IBSS Yazılım ve Teknoloji A.Ş.",
-     highlights: [
-    "Advanced proficiency in React and Next.js, delivering scalable and maintainable web applications.",
-    "Focused on performance optimization techniques and UX improvements to enhance user experience.",
-  ],
+    company: "IBSS Teknoloji ve Yazılım A.Ş.",
+    highlights: [
+      "Advanced proficiency in React and Next.js, delivering scalable and maintainable web applications.",
+      "Focused on performance optimization techniques and UX improvements to enhance user experience.",
+    ],
   },
- {
-  period: "2023 — 2024",
-  title: "Frontend Developer Intern",
-  company: "IBSS Yazılım ve Teknoloji A.Ş.",
-  highlights: [
-    "Strengthened core frontend fundamentals including HTML, CSS, and JavaScript through hands-on project experience.",
-    "Gained practical experience with React, building reusable components and managing application state.",
-  ],
-},
+  {
+    period: "Jul 2023 — Sep 2024",
+    title: "Frontend Developer Intern",
+     company: "IBSS Teknoloji ve Yazılım A.Ş.",
+    highlights: [
+      "Strengthened core frontend fundamentals including HTML, CSS, and JavaScript through hands-on project experience.",
+      "Gained practical experience with React, building reusable components and managing application state.",
+    ],
+  },
 ];
 
 export function ExperienceSection() {
@@ -58,7 +58,7 @@ export function ExperienceSection() {
 
             {index < experiences.length - 1 && (
               <div className="flex justify-center py-4">
-                <ArrowDown className="h-6 w-6 text-primary" />
+                <ArrowUp className="h-6 w-6 text-primary" />
               </div>
             )}
           </div>
