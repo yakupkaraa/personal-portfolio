@@ -1,13 +1,33 @@
 import Link from "next/link";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { Mail } from "lucide-react";
+
+const SOCIAL_LINKS = [
+  { href: "https://github.com/yakupkaraa", label: "GitHub", icon: <FaGithub className="h-4 w-4" /> },
+  { href: "https://linkedin.com/in/yakupkara", label: "LinkedIn", icon: <FaLinkedin className="h-4 w-4" /> },
+  { href: "mailto:yakupkaraa60@gmail.com", label: "Email", icon: <Mail className="h-4 w-4" /> },
+];
+
+ const year = new Date().getFullYear();
 
 export default function Footer() {
   return (
     <footer className="w-full border-t border-border bg-background">
       <div className="max-w-7xl mx-auto px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground uppercase tracking-widest">
-        <span>© 2026 Portfolio • Built with precision</span>
-        <div className="flex gap-8">
-          <Link href="https://github.com/yakupkaraa" className="hover:text-primary transition-colors">GitHub</Link>
-          <Link href="https://www.linkedin.com/in/yakup-kara-996ba4270/" className="hover:text-primary transition-colors">LinkedIn</Link>
+        <span>© {year} Yakup Kara • Built with precision</span>
+        <div className="flex items-center gap-6">
+          {SOCIAL_LINKS.map(({ href, label, icon }) => (
+            <Link
+              key={label}
+              href={href}
+              className="flex items-center gap-2 hover:text-primary transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {icon}
+              {label}
+            </Link>
+          ))}
         </div>
       </div>
     </footer>

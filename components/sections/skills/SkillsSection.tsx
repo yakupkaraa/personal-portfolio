@@ -1,5 +1,8 @@
+"use client";
+
 import { Code2, Palette, Wrench } from "lucide-react";
 import { ReactNode } from "react";
+import { motion } from "framer-motion";
 
 interface Skill {
   label: string;
@@ -28,7 +31,8 @@ const skillCards: SkillCard[] = [
     skills: [
       { label: "TypeScript", color: "bg-blue-500/10 text-blue-400 border-blue-500/20 hover:border-blue-400" },
       { label: "React 18+", color: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20 hover:border-cyan-400" },
-      { label: "Next.js", color: "bg-green-500/10 text-green-400 border-green-500/20 hover:border-green-400" },
+      { label: "Next.js", color: "bg-slate-500/10 text-slate-300 border-slate-500/20 hover:border-slate-300" },
+      { label: "Node.js", color: "bg-green-500/10 text-green-400 border-green-500/20 hover:border-green-400" },
     ],
   },
   {
@@ -38,38 +42,64 @@ const skillCards: SkillCard[] = [
     colSpan: "md:col-span-2 lg:col-span-3",
     skills: [
       { label: "Tailwind CSS", color: "bg-sky-500/10 text-sky-400 border-sky-500/20 hover:border-sky-400" },
+      { label: "Framer Motion", color: "bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/20 hover:border-fuchsia-400" },
       { label: "shadcn/ui", color: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20 hover:border-indigo-400" },
+      { label: "Figma", color: "bg-orange-500/10 text-orange-400 border-orange-500/20 hover:border-orange-400" },
     ],
   },
 ];
 
 const infraItems: InfraItem[] = [
-  { icon: <Wrench className="h-5 w-5 text-secondary" />, label: "PostgreSQL" },
+  { icon: <Wrench className="h-5 w-5 text-secondary" />, label: "Vercel" },
   { icon: <Wrench className="h-5 w-5 text-secondary" />, label: "Git/GitHub" },
+  { icon: <Wrench className="h-5 w-5 text-secondary" />, label: "Jest" },
+  { icon: <Wrench className="h-5 w-5 text-secondary" />, label: "Playwright" },
 ];
 
 export function SkillsSection() {
   return (
     <section className="max-w-7xl mx-auto px-8 py-24">
       <div className="max-w-3xl mb-16">
-        <span className="text-sm font-medium tracking-widest text-primary uppercase mb-4 block">
+        <motion.span
+          className="text-sm font-medium tracking-widest text-primary uppercase mb-4 block"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
           Expertise & Pathway
-        </span>
-        <h1 className="text-5xl font-bold tracking-tight text-foreground mb-8">
+        </motion.span>
+        <motion.h1
+          className="text-5xl font-bold tracking-tight text-foreground mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           Technical Architecture & Professional Journey.
-        </h1>
-        <p className="text-lg text-muted-foreground leading-relaxed">
+        </motion.h1>
+        <motion.p
+          className="text-lg text-muted-foreground leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           Bridging the gap between robust backend structures and fluid frontend
           experiences. My stack is built on precision, scalability, and modern
           performance standards.
-        </p>
+        </motion.p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6">
-        {skillCards.map(({ icon, title, description, skills, colSpan }) => (
-          <div
+        {skillCards.map(({ icon, title, description, skills, colSpan }, index) => (
+          <motion.div
             key={title}
             className={`${colSpan} bg-card border border-border rounded-xl p-8 flex flex-col justify-between`}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <div>
               <div className="flex items-center gap-3 mb-6">
@@ -90,10 +120,16 @@ export function SkillsSection() {
                 </span>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
 
-        <div className="md:col-span-4 lg:col-span-6 bg-card border border-border rounded-xl p-8">
+        <motion.div
+          className="md:col-span-4 lg:col-span-6 bg-card border border-border rounded-xl p-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
             <div className="max-w-md">
               <h3 className="text-2xl font-semibold text-foreground mb-2">
@@ -112,7 +148,7 @@ export function SkillsSection() {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
