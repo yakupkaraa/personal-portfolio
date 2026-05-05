@@ -4,8 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 
 const ThemeToggle = dynamic(
   () => import("./ThemeToggle").then((mod) => mod.ThemeToggle),
@@ -21,6 +22,7 @@ const NAV_LINKS = [
 export default function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -41,6 +43,7 @@ export default function Header() {
           Yakup Kara
         </Link>
 
+        {/* Desktop nav */}
         <nav className="hidden md:block">
           <ul className="flex items-center gap-2">
             {NAV_LINKS.map(({ href, label }) => (
@@ -69,10 +72,51 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           <ThemeToggle />
+          {/* Hamburger */}
+          <button
+            className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden max-w-7xl mx-auto mt-2 border border-border rounded-2xl shadow-lg overflow-hidden"
+            style={{ backgroundColor: "hsl(var(--background))" }}
+          >
+            <ul className="flex flex-col p-4 gap-2">
+              {NAV_LINKS.map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    onClick={() => setMenuOpen(false)}
+                    className={cn(
+                      "block px-4 py-2 rounded-full transition-colors text-sm",
+                      pathname === href
+                        ? "bg-accent text-primary font-semibold"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    )}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
