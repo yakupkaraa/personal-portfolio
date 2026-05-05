@@ -85,7 +85,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -93,8 +92,7 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden max-w-7xl mx-auto mt-2 border border-border rounded-2xl shadow-lg overflow-hidden"
-            style={{ backgroundColor: "hsl(var(--background))" }}
+            className="md:hidden max-w-7xl mx-auto mt-2 border border-border rounded-2xl shadow-lg overflow-hidden bg-background"
           >
             <ul className="flex flex-col p-4 gap-2">
               {NAV_LINKS.map(({ href, label }) => (
