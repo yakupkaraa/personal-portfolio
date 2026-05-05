@@ -11,15 +11,7 @@ interface Experience {
 }
 
 const experiences: Experience[] = [
-  {
-    period: "Oct 2023 — Present",
-    title: "Frontend Developer",
-    company: "IBSS Technology and Software Inc.",
-    highlights: [
-      "Advanced proficiency in React and Next.js, delivering scalable and maintainable web applications.",
-      "Focused on performance optimization techniques and UX improvements to enhance user experience.",
-    ],
-  },
+  
   {
     period: "Jul 2023 — Sep 2023",
     title: "Frontend Developer Intern",
@@ -27,6 +19,15 @@ const experiences: Experience[] = [
     highlights: [
       "Strengthened core frontend fundamentals including HTML, CSS, and JavaScript through hands-on project experience.",
       "Gained practical experience with React, building reusable components and managing application state.",
+    ],
+  },
+  {
+    period: "Oct 2023 — Present",
+    title: "Frontend Developer",
+    company: "IBSS Technology and Software Inc.",
+    highlights: [
+      "Advanced proficiency in React and Next.js, delivering scalable and maintainable web applications.",
+      "Focused on performance optimization techniques and UX improvements to enhance user experience.",
     ],
   },
 ];
