@@ -16,10 +16,6 @@ export function HeroSection() {
     <section className="max-w-7xl mx-auto px-8 py-24">
       <div className="flex flex-col lg:flex-row items-center gap-16">
         <div className="flex-1 space-y-8">
-          <motion.div {...fadeUp(0.1)} className="inline-flex items-center px-3 py-1 rounded-full border border-border bg-muted text-primary text-sm font-medium">
-            <span className="w-2 h-2 rounded-full bg-primary mr-2" />
-            Available for new projects
-          </motion.div>
 
           <motion.h1 {...fadeUp(0.2)} className="text-5xl font-bold tracking-tight text-foreground max-w-2xl leading-tight">
             Hi, I&apos;m <span className="text-primary">Yakup Kara</span>,{" "}
@@ -27,8 +23,7 @@ export function HeroSection() {
           </motion.h1>
 
           <motion.p {...fadeUp(0.3)} className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-            I build resilient, high-performance web architectures with a focus
-            on clean code and exceptional user experience.
+            I design robust web infrastructures that deliver outstanding performance with a strong emphasis on coding best practices and end-user experience.
           </motion.p>
 
           <motion.div {...fadeUp(0.4)} className="flex items-center gap-4 pt-2">
@@ -37,9 +32,6 @@ export function HeroSection() {
                 View Projects
                 <ArrowRight className="h-4 w-4" />
               </Link>
-            </Button>
-            <Button variant="outline">
-              <Link href="/about">About Me</Link>
             </Button>
           </motion.div>
         </div>
@@ -52,9 +44,9 @@ export function HeroSection() {
         >
           <div className="aspect-square w-full max-w-md mx-auto relative rounded-2xl overflow-hidden border border-border">
             <img
-              src="/images/profile.jpg"
-              alt="Profile"
-              className="w-full h-full object-cover grayscale opacity-90"
+              src="/img/undraw_code-review_jdgp.svg"
+              alt="Avatar"
+              className="w-full h-full object-contain"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-background/40 via-transparent to-transparent" />
           </div>
@@ -70,7 +62,6 @@ export function HeroSection() {
                 <Code2 className="h-6 w-6" />
               </div>
               <div>
-                <div className="text-sm font-semibold text-foreground">50+ Projects</div>
                 <div className="text-xs text-muted-foreground">Built with precision</div>
               </div>
             </div>

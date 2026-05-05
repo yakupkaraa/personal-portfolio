@@ -15,19 +15,19 @@ const cards: PhilosophyCard[] = [
   {
     icon: <Layers className="h-6 w-6 text-primary" />,
     title: "Scalable Design Systems",
-    description: "I believe in building foundations that last. My approach centers on modular components and robust state management for seamless growth.",
+    description: "I believe in foundations that stand the test of time. My philosophy revolves around modularity and strong state management to ensure scalability.",
     colSpan: "md:col-span-2",
   },
   {
     icon: <Zap className="h-6 w-6 text-primary" />,
     title: "Performance First",
-    description: "Optimized for Core Web Vitals, ensuring every millisecond is accounted for through modern hydration and lazy-loading strategies.",
+    description: "Optimized according to Core Web Vitals, where every millisecond counts using today’s best hydration techniques, lazy loading, etc.",
     colSpan: "",
   },
   {
     icon: <FileCode className="h-6 w-6 text-primary" />,
     title: "Clean Code",
-    description: "Self-documenting, type-safe development using TypeScript and industry-leading linting standards for maintainable codebases.",
+    description: "Development with self-documentation and type safety using TypeScript and leading linting practices in the industry.",
     colSpan: "",
   },
 ];
