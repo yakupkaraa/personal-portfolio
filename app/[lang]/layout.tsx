@@ -4,7 +4,6 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
-import { Locale } from "@/lib/i18n";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -31,7 +30,7 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
 
@@ -41,9 +40,9 @@ export default async function RootLayout({
         className={`${spaceGrotesk.variable} ${inter.variable} font-sans antialiased`}
       >
         <ThemeProvider>
-          <Header lang={lang} />
+          <Header lang={lang as "en" | "tr"} />
           <main className="min-h-screen">{children}</main>
-          <Footer lang={lang} />
+          <Footer lang={lang as "en" | "tr"} />
         </ThemeProvider>
       </body>
     </html>
