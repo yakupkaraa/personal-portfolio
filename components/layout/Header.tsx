@@ -49,7 +49,6 @@ export default function Header({ lang }: HeaderProps) {
           Yakup Kara
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden md:block">
           <ul className="flex items-center gap-2">
             {NAV_LINKS.map(({ href, label }) => (
@@ -79,29 +78,17 @@ export default function Header({ lang }: HeaderProps) {
         </nav>
 
         <div className="flex items-center gap-2">
-          {/* Language switcher */}
-          <div className="flex items-center gap-1 border border-border rounded-full p-1">
-            <Link
-              href={pathname.replace(`/${lang}`, '/en')}
-              className={cn(
-                "px-3 py-1 rounded-full text-xs font-medium transition-colors",
-                lang === 'en' ? "bg-accent text-primary" : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              EN
-            </Link>
-            <Link
-              href={pathname.replace(`/${lang}`, '/tr')}
-              className={cn(
-                "px-3 py-1 rounded-full text-xs font-medium transition-colors",
-                lang === 'tr' ? "bg-accent text-primary" : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              TR
-            </Link>
-          </div>
+          {/* Language switcher - single button */}
+          <button
+            onClick={() => {
+              const newLang = lang === 'en' ? 'tr' : 'en';
+              window.location.href = pathname.replace(`/${lang}`, `/${newLang}`);
+            }}
+            className="px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+          >
+            {lang === 'en' ? 'TR' : 'EN'}
+          </button>
           <ThemeToggle />
-          {/* Hamburger */}
           <button
             className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
