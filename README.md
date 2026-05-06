@@ -53,6 +53,6 @@ MIT
 
 ##  Screenshots
 
-![Home Dark](./public/screenshots/HomeLight.png)
-![Skills Dark](./public/screenshots/SkilssDark.png)
+![Home Dark](./public/screenshots/HomeDark.png)
+![Skills Dark](./public/screenshots/SkilsDark.png)
 ![Skills Light](./public/screenshots/SkilssLight.png)
