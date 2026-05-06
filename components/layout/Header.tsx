@@ -7,22 +7,28 @@ import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { Locale, getDictionary } from "@/lib/i18n";
 
 const ThemeToggle = dynamic(
   () => import("./ThemeToggle").then((mod) => mod.ThemeToggle),
   { ssr: false }
 );
 
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/skills", label: "Skills" },
-  { href: "/projects", label: "Projects" },
-];
+interface HeaderProps {
+  lang: Locale;
+}
 
-export default function Header() {
+export default function Header({ lang }: HeaderProps) {
+  const dict = getDictionary(lang);
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const NAV_LINKS = [
+    { href: `/${lang}`, label: dict.header.home },
+    { href: `/${lang}/skills`, label: dict.header.skills },
+    { href: `/${lang}/projects`, label: dict.header.projects },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -39,7 +45,7 @@ export default function Header() {
         }}
         className="max-w-7xl mx-auto border border-border rounded-2xl px-8 py-3 flex justify-between items-center transition-all duration-300 shadow-lg"
       >
-        <Link href="/" className="text-xl font-bold tracking-tighter hover:opacity-80 transition-opacity">
+        <Link href={`/${lang}`} className="text-xl font-bold tracking-tighter hover:opacity-80 transition-opacity">
           Yakup Kara
         </Link>
 
@@ -73,6 +79,27 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          {/* Language switcher */}
+          <div className="flex items-center gap-1 border border-border rounded-full p-1">
+            <Link
+              href={pathname.replace(`/${lang}`, '/en')}
+              className={cn(
+                "px-3 py-1 rounded-full text-xs font-medium transition-colors",
+                lang === 'en' ? "bg-accent text-primary" : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              EN
+            </Link>
+            <Link
+              href={pathname.replace(`/${lang}`, '/tr')}
+              className={cn(
+                "px-3 py-1 rounded-full text-xs font-medium transition-colors",
+                lang === 'tr' ? "bg-accent text-primary" : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              TR
+            </Link>
+          </div>
           <ThemeToggle />
           {/* Hamburger */}
           <button

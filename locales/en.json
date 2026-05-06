@@ -1,0 +1,33 @@
+{
+  "header": {
+    "home": "Home",
+    "skills": "Skills",
+    "projects": "Projects"
+  },
+  "footer": {
+    "rights": "Built with precision"
+  },
+  "hero": {
+    "title": "Hi, I'm Yakup Kara, a Frontend Developer.",
+    "description": "I design robust web infrastructures that deliver outstanding performance with a strong emphasis on coding best practices and end-user experience.",
+    "viewProjects": "View Projects",
+    "badge": "Built with precision"
+  },
+  "philosophy": {
+    "title": "Philosophy & Approach",
+    "cards": {
+      "scalable": {
+        "title": "Scalable Design Systems",
+        "description": "I believe in foundations that stand the test of time. My philosophy revolves around modularity and strong state management to ensure scalability."
+      },
+      "performance": {
+        "title": "Performance First",
+        "description": "Optimized according to Core Web Vitals, where every millisecond counts using today's best hydration techniques, lazy loading, etc."
+      },
+      "cleanCode": {
+        "title": "Clean Code",
+        "description": "Development with self-documentation and type safety using TypeScript and leading linting practices in the industry."
+      }
+    }
+  }
+}

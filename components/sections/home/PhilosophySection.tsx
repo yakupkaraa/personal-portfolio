@@ -1,38 +1,37 @@
 "use client";
 
 import { Layers, Zap, FileCode } from "lucide-react";
-import { ReactNode } from "react";
 import { motion } from "framer-motion";
+import { Locale, getDictionary } from "@/lib/i18n";
 
-interface PhilosophyCard {
-  icon: ReactNode;
-  title: string;
-  description: string;
-  colSpan: string;
+interface PhilosophySectionProps {
+  lang: Locale;
 }
 
-const cards: PhilosophyCard[] = [
-  {
-    icon: <Layers className="h-6 w-6 text-primary" />,
-    title: "Scalable Design Systems",
-    description: "I believe in foundations that stand the test of time. My philosophy revolves around modularity and strong state management to ensure scalability.",
-    colSpan: "md:col-span-2",
-  },
-  {
-    icon: <Zap className="h-6 w-6 text-primary" />,
-    title: "Performance First",
-    description: "Optimized according to Core Web Vitals, where every millisecond counts using today’s best hydration techniques, lazy loading, etc.",
-    colSpan: "",
-  },
-  {
-    icon: <FileCode className="h-6 w-6 text-primary" />,
-    title: "Clean Code",
-    description: "Development with self-documentation and type safety using TypeScript and leading linting practices in the industry.",
-    colSpan: "",
-  },
-];
+export function PhilosophySection({ lang }: PhilosophySectionProps) {
+  const dict = getDictionary(lang);
 
-export function PhilosophySection() {
+  const cards = [
+    {
+      icon: <Layers className="h-6 w-6 text-primary" />,
+      title: dict.philosophy.cards.scalable.title,
+      description: dict.philosophy.cards.scalable.description,
+      colSpan: "md:col-span-2",
+    },
+    {
+      icon: <Zap className="h-6 w-6 text-primary" />,
+      title: dict.philosophy.cards.performance.title,
+      description: dict.philosophy.cards.performance.description,
+      colSpan: "",
+    },
+    {
+      icon: <FileCode className="h-6 w-6 text-primary" />,
+      title: dict.philosophy.cards.cleanCode.title,
+      description: dict.philosophy.cards.cleanCode.description,
+      colSpan: "",
+    },
+  ];
+
   return (
     <section className="max-w-7xl mx-auto px-8 py-24">
       <motion.h2
@@ -40,9 +39,9 @@ export function PhilosophySection() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        transition={{ duration: 0.5 }}
       >
-        Philosophy & Approach
+        {dict.philosophy.title}
       </motion.h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -53,7 +52,7 @@ export function PhilosophySection() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center">
               {icon}
@@ -68,7 +67,7 @@ export function PhilosophySection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
+          transition={{ duration: 0.5, delay: 0.3 }}
         >
           <div className="bg-background rounded-lg p-8 h-full border border-border">
             <div className="flex items-center gap-2 mb-6">

@@ -1,0 +1,33 @@
+{
+  "header": {
+    "home": "Ana Sayfa",
+    "skills": "Yetenekler",
+    "projects": "Projeler"
+  },
+  "footer": {
+    "rights": "Hassasiyetle inşa edildi"
+  },
+  "hero": {
+    "title": "Merhaba, ben Yakup Kara, Frontend Developer'ım.",
+    "description": "Kodlama en iyi uygulamalarına ve son kullanıcı deneyimine güçlü bir vurgu yaparak olağanüstü performans sunan sağlam web altyapıları tasarlıyorum.",
+    "viewProjects": "Projeleri Görüntüle",
+    "badge": "Hassasiyetle inşa edildi"
+  },
+  "philosophy": {
+    "title": "Felsefe & Yaklaşım",
+    "cards": {
+      "scalable": {
+        "title": "Ölçeklenebilir Tasarım Sistemleri",
+        "description": "Zamanın testinden geçecek temellere inanıyorum. Felsefem, ölçeklenebilirliği sağlamak için modülerlik ve güçlü durum yönetimi etrafında dönüyor."
+      },
+      "performance": {
+        "title": "Önce Performans",
+        "description": "Günümüzün en iyi hidrasyon teknikleri, lazy loading vb. kullanılarak her milisaniyenin önemli olduğu Core Web Vitals'a göre optimize edilmiş."
+      },
+      "cleanCode": {
+        "title": "Temiz Kod",
+        "description": "TypeScript ve sektördeki önde gelen linting uygulamaları kullanılarak kendi kendini belgeleyen ve tip güvenliği ile geliştirme."
+      }
+    }
+  }
+}
