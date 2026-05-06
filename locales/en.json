@@ -29,5 +29,55 @@
         "description": "Development with self-documentation and type safety using TypeScript and leading linting practices in the industry."
       }
     }
+  },
+  "skills": {
+    "badge": "Expertise & Pathway",
+    "title": "Technical Architecture & Professional Journey.",
+    "description": "Bridging the gap between robust backend structures and fluid frontend experiences. My stack is built on precision, scalability, and modern performance standards.",
+    "cards": {
+      "coreDev": {
+        "title": "Core Development",
+        "description": "Proficiency in building reactive, type-safe applications with a focus on clean code and modularity."
+      },
+      "uiux": {
+        "title": "UI / UX Systems",
+        "description": "Crafting beautiful, accessible interfaces using utility-first CSS and advanced component design patterns."
+      }
+    },
+    "infrastructure": {
+      "title": "Infrastructure & Workflow",
+      "description": "The tools that keep the engine running smoothly, from CI/CD pipelines to state management."
+    }
+  },
+  "experience": {
+    "title": "Work Experience",
+    "jobs": {
+      "intern": {
+        "period": "Jul 2023 — Sep 2023",
+        "title": "Frontend Developer Intern",
+        "company": "IBSS Technology and Software Inc.",
+        "highlights": [
+          "Strengthened core frontend fundamentals including HTML, CSS, and JavaScript through hands-on project experience.",
+          "Gained practical experience with React, building reusable components and managing application state."
+        ]
+      },
+      "current": {
+        "period": "Oct 2023 — Present",
+        "title": "Frontend Developer",
+        "company": "IBSS Technology and Software Inc.",
+        "highlights": [
+          "Advanced proficiency in React and Next.js, delivering scalable and maintainable web applications.",
+          "Focused on performance optimization techniques and UX improvements to enhance user experience."
+        ]
+      }
+    }
+  },
+  "projects": {
+    "title": "Curated Projects",
+    "description": "A collection of technical solutions where architectural integrity meets pixel-perfect execution.",
+    "comingSoon": {
+      "title": "Projects in Progress",
+      "description": "Currently working on some exciting projects. Check back soon or follow me on GitHub to stay updated."
+    }
   }
 }

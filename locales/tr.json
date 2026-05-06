@@ -9,7 +9,7 @@
   },
   "hero": {
     "title": "Merhaba, ben Yakup Kara, Frontend Developer'ım.",
-    "description": "Kodlama en iyi uygulamalarına ve son kullanıcı deneyimine güçlü bir vurgu yaparak olağanüstü performans sunan sağlam web altyapıları tasarlıyorum.",
+    "description": "Clean code prensiplerine ve kullanıcı deneyimine odaklanarak yüksek performanslı web altyapıları tasarlıyorum.",
     "viewProjects": "Projeleri Görüntüle",
     "badge": "Hassasiyetle inşa edildi"
   },
@@ -17,17 +17,67 @@
     "title": "Felsefe & Yaklaşım",
     "cards": {
       "scalable": {
-        "title": "Ölçeklenebilir Tasarım Sistemleri",
-        "description": "Zamanın testinden geçecek temellere inanıyorum. Felsefem, ölçeklenebilirliği sağlamak için modülerlik ve güçlü durum yönetimi etrafında dönüyor."
+        "title": "Scalable Design Systems",
+        "description": "Zamana dayanıklı temeller inşa ediyorum. Yaklaşımım, ölçeklenebilirlik için modüler component mimarisi ve robust state management üzerine kurulu."
       },
       "performance": {
-        "title": "Önce Performans",
-        "description": "Günümüzün en iyi hidrasyon teknikleri, lazy loading vb. kullanılarak her milisaniyenin önemli olduğu Core Web Vitals'a göre optimize edilmiş."
+        "title": "Performance First",
+        "description": "Core Web Vitals metriklerine göre optimize edilmiş. Modern hydration teknikleri ve lazy loading ile her milisaniyenin önemli olduğu uygulamalar geliştiriyorum."
       },
       "cleanCode": {
-        "title": "Temiz Kod",
-        "description": "TypeScript ve sektördeki önde gelen linting uygulamaları kullanılarak kendi kendini belgeleyen ve tip güvenliği ile geliştirme."
+        "title": "Clean Code",
+        "description": "TypeScript ve endüstri standardı linting pratikleri kullanarak self-documenting ve type-safe geliştirme yapıyorum."
       }
+    }
+  },
+  "skills": {
+    "badge": "Uzmanlık & Yol Haritası",
+    "title": "Teknik Mimari & Profesyonel Yolculuk.",
+    "description": "Sağlam backend yapıları ile akıcı frontend deneyimleri arasında köprü kuruyorum. Stack'im hassasiyet, ölçeklenebilirlik ve modern performans standartları üzerine kurulu.",
+    "cards": {
+      "coreDev": {
+        "title": "Core Development",
+        "description": "Clean code ve modülerlik odaklı, reactive ve type-safe uygulamalar geliştirme yetkinliği."
+      },
+      "uiux": {
+        "title": "UI / UX Systems",
+        "description": "Utility-first CSS ve gelişmiş component design pattern'leri kullanarak güzel, erişilebilir arayüzler tasarlıyorum."
+      }
+    },
+    "infrastructure": {
+      "title": "Infrastructure & Workflow",
+      "description": "CI/CD pipeline'lardan state management'a kadar, motoru sorunsuz çalıştıran araçlar."
+    }
+  },
+  "experience": {
+    "title": "İş Deneyimi",
+    "jobs": {
+      "intern": {
+        "period": "Tem 2023 — Eyl 2023",
+        "title": "Frontend Developer Intern",
+        "company": "IBSS Technology and Software Inc.",
+        "highlights": [
+          "HTML, CSS ve JavaScript temellerini pratik proje deneyimleri ile güçlendirdim.",
+          "React ile reusable component'ler geliştirme ve application state yönetimi konusunda pratik deneyim kazandım."
+        ]
+      },
+      "current": {
+        "period": "Eki 2023 — Günümüz",
+        "title": "Frontend Developer",
+        "company": "IBSS Technology and Software Inc.",
+        "highlights": [
+          "React ve Next.js'te ileri seviye yetkinlik, ölçeklenebilir ve maintainable web uygulamaları geliştirme.",
+          "Performance optimization teknikleri ve UX iyileştirmeleri üzerine odaklanarak kullanıcı deneyimini geliştirdim."
+        ]
+      }
+    }
+  },
+  "projects": {
+    "title": "Seçilmiş Projeler",
+    "description": "Mimari bütünlüğün pixel-perfect execution ile buluştuğu teknik çözümlerin koleksiyonu.",
+    "comingSoon": {
+      "title": "Projeler Devam Ediyor",
+      "description": "Şu anda heyecan verici projeler üzerinde çalışıyorum. Yakında tekrar kontrol edin veya  güncellemeler için beni GitHub'dan takip edin."
     }
   }
 }

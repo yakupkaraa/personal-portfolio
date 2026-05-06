@@ -2,37 +2,30 @@
 
 import { ArrowUp } from "lucide-react";
 import { motion } from "framer-motion";
+import { Locale, getDictionary } from "@/lib/i18n";
 
-interface Experience {
-  period: string;
-  title: string;
-  company: string;
-  highlights: string[];
+interface ExperienceSectionProps {
+  lang: Locale;
 }
 
-const experiences: Experience[] = [
-  
-  {
-    period: "Jul 2023 — Sep 2023",
-    title: "Frontend Developer Intern",
-    company: "IBSS Technology and Software Inc.",
-    highlights: [
-      "Strengthened core frontend fundamentals including HTML, CSS, and JavaScript through hands-on project experience.",
-      "Gained practical experience with React, building reusable components and managing application state.",
-    ],
-  },
-  {
-    period: "Oct 2023 — Present",
-    title: "Frontend Developer",
-    company: "IBSS Technology and Software Inc.",
-    highlights: [
-      "Advanced proficiency in React and Next.js, delivering scalable and maintainable web applications.",
-      "Focused on performance optimization techniques and UX improvements to enhance user experience.",
-    ],
-  },
-];
+export function ExperienceSection({ lang }: ExperienceSectionProps) {
+  const dict = getDictionary(lang);
 
-export function ExperienceSection() {
+  const experiences = [
+    {
+      period: dict.experience.jobs.intern.period,
+      title: dict.experience.jobs.intern.title,
+      company: dict.experience.jobs.intern.company,
+      highlights: dict.experience.jobs.intern.highlights,
+    },
+    {
+      period: dict.experience.jobs.current.period,
+      title: dict.experience.jobs.current.title,
+      company: dict.experience.jobs.current.company,
+      highlights: dict.experience.jobs.current.highlights,
+    },
+  ];
+
   return (
     <section className="max-w-7xl mx-auto px-8 py-24">
       <motion.h2
@@ -42,7 +35,7 @@ export function ExperienceSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        Work Experience
+        {dict.experience.title}
       </motion.h2>
 
       <div className="flex flex-col items-center max-w-2xl mx-auto">
@@ -63,7 +56,7 @@ export function ExperienceSection() {
                 {company}
               </p>
               <ul className="space-y-3">
-                {highlights.map((highlight) => (
+                {highlights.map((highlight: string) => (
                   <li key={highlight} className="flex items-start gap-3 text-muted-foreground">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
                     {highlight}

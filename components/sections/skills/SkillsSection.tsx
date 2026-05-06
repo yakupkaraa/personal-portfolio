@@ -1,61 +1,54 @@
 "use client";
 
 import { Code2, Palette, Wrench } from "lucide-react";
-import { ReactNode } from "react";
 import { motion } from "framer-motion";
+import { Locale, getDictionary } from "@/lib/i18n";
 
 interface Skill {
   label: string;
   color: string;
 }
 
-interface SkillCard {
-  icon: ReactNode;
-  title: string;
-  description: string;
-  skills: Skill[];
-  colSpan: string;
+interface SkillsSectionProps {
+  lang: Locale;
 }
 
-interface InfraItem {
-  icon: ReactNode;
-  label: string;
-}
+export function SkillsSection({ lang }: SkillsSectionProps) {
+  const dict = getDictionary(lang);
 
-const skillCards: SkillCard[] = [
-  {
-    icon: <Code2 className="h-7 w-7 text-primary" />,
-    title: "Core Development",
-    description: "Proficiency in building reactive, type-safe applications with a focus on clean code and modularity.",
-    colSpan: "md:col-span-2 lg:col-span-3",
-    skills: [
-      { label: "TypeScript", color: "bg-blue-500/10 text-blue-400 border-blue-500/20 hover:border-blue-400" },
-      { label: "React 18+", color: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20 hover:border-cyan-400" },
-      { label: "Next.js", color: "bg-slate-500/10 text-slate-300 border-slate-500/20 hover:border-slate-300" },
-    ],
-  },
-  {
-    icon: <Palette className="h-7 w-7 text-secondary" />,
-    title: "UI / UX Systems",
-    description: "Crafting beautiful, accessible interfaces using utility-first CSS and advanced component design patterns.",
-    colSpan: "md:col-span-2 lg:col-span-3",
-    skills: [
-      { label: "Tailwind CSS", color: "bg-sky-500/10 text-sky-400 border-sky-500/20 hover:border-sky-400" },
-      { label: "Framer Motion", color: "bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/20 hover:border-fuchsia-400" },
-      { label: "shadcn/ui", color: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20 hover:border-indigo-400" },
-      { label: "Graphql", color: "bg-orange-500/10 text-orange-400 border-orange-500/20 hover:border-orange-400" },
-    ],
-  },
-];
+  const skillCards = [
+    {
+      icon: <Code2 className="h-7 w-7 text-primary" />,
+      title: dict.skills.cards.coreDev.title,
+      description: dict.skills.cards.coreDev.description,
+      colSpan: "md:col-span-2 lg:col-span-3",
+      skills: [
+        { label: "TypeScript", color: "bg-blue-500/10 text-blue-400 border-blue-500/20 hover:border-blue-400" },
+        { label: "React 18+", color: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20 hover:border-cyan-400" },
+        { label: "Next.js", color: "bg-slate-500/10 text-slate-300 border-slate-500/20 hover:border-slate-300" },
+      ],
+    },
+    {
+      icon: <Palette className="h-7 w-7 text-secondary" />,
+      title: dict.skills.cards.uiux.title,
+      description: dict.skills.cards.uiux.description,
+      colSpan: "md:col-span-2 lg:col-span-3",
+      skills: [
+        { label: "Tailwind CSS", color: "bg-sky-500/10 text-sky-400 border-sky-500/20 hover:border-sky-400" },
+        { label: "Framer Motion", color: "bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/20 hover:border-fuchsia-400" },
+        { label: "shadcn/ui", color: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20 hover:border-indigo-400" },
+        { label: "GraphQL", color: "bg-orange-500/10 text-orange-400 border-orange-500/20 hover:border-orange-400" },
+      ],
+    },
+  ];
 
-const infraItems: InfraItem[] = [
-  { icon: <Wrench className="h-5 w-5 text-secondary" />, label: "Vercel" },
-  { icon: <Wrench className="h-5 w-5 text-secondary" />, label: "Git/GitHub" },
-  { icon: <Wrench className="h-5 w-5 text-secondary" />, label: "Jest" },
-  { icon: <Wrench className="h-5 w-5 text-secondary" />, label: "Playwright" },
-];
+  const infraItems = [
+    { icon: <Wrench className="h-5 w-5 text-secondary" />, label: "Vercel" },
+    { icon: <Wrench className="h-5 w-5 text-secondary" />, label: "Git/GitHub" },
+    { icon: <Wrench className="h-5 w-5 text-secondary" />, label: "Jest" },
+    { icon: <Wrench className="h-5 w-5 text-secondary" />, label: "Playwright" },
+  ];
 
-export function SkillsSection() {
   return (
     <section className="max-w-7xl mx-auto px-8 py-24">
       <div className="max-w-3xl mb-16">
@@ -66,7 +59,7 @@ export function SkillsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Expertise & Pathway
+          {dict.skills.badge}
         </motion.span>
         <motion.h1
           className="text-5xl font-bold tracking-tight text-foreground mb-8"
@@ -75,7 +68,7 @@ export function SkillsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Technical Architecture & Professional Journey.
+          {dict.skills.title}
         </motion.h1>
         <motion.p
           className="text-lg text-muted-foreground leading-relaxed"
@@ -84,9 +77,7 @@ export function SkillsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Bridging the gap between robust backend structures and fluid frontend
-          experiences. My stack is built on precision, scalability, and modern
-          performance standards.
+          {dict.skills.description}
         </motion.p>
       </div>
 
@@ -132,10 +123,10 @@ export function SkillsSection() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
             <div className="max-w-md">
               <h3 className="text-2xl font-semibold text-foreground mb-2">
-                Infrastructure & Workflow
+                {dict.skills.infrastructure.title}
               </h3>
               <p className="text-muted-foreground">
-                The tools that keep the engine running smoothly, from CI/CD pipelines to state management.
+                {dict.skills.infrastructure.description}
               </p>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
