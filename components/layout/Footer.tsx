@@ -18,15 +18,15 @@ export default function Footer({ lang }: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="w-full border-t border-border bg-background">
-      <div className="max-w-7xl mx-auto px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground uppercase tracking-widest">
+    <footer className="mt-4 w-full">
+      <div className="flex flex-col items-center justify-between gap-4 px-3 pb-2 pt-4 text-[13px] text-muted-foreground md:flex-row">
         <span>© {year} Yakup Kara • {dict.footer.rights}</span>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-5">
           {SOCIAL_LINKS.map(({ href, label, icon }) => (
             <Link
               key={label}
               href={href}
-              className="flex items-center gap-2 hover:text-primary transition-colors"
+              className="flex items-center gap-2 transition-colors hover:text-foreground"
               target="_blank"
               rel="noopener noreferrer"
             >

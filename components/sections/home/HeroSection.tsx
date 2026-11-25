@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Code2 } from "lucide-react";
+import { ArrowUpRight, Mail } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { Locale, getDictionary } from "@/lib/i18n";
 
@@ -12,6 +12,12 @@ const fadeUp = (delay: number) => ({
   transition: { duration: 0.5, delay },
 });
 
+const SOCIAL_LINKS = [
+  { href: "https://github.com/yakupkaraa", label: "GitHub", icon: <FaGithub className="h-5 w-5" /> },
+  { href: "https://linkedin.com/in/yakupkara", label: "LinkedIn", icon: <FaLinkedin className="h-5 w-5" /> },
+  { href: "mailto:yakupkaraa60@gmail.com", label: "Email", icon: <Mail className="h-5 w-5" /> },
+];
+
 interface HeroSectionProps {
   lang: Locale;
 }
@@ -19,58 +25,90 @@ interface HeroSectionProps {
 export function HeroSection({ lang }: HeroSectionProps) {
   const dict = getDictionary(lang);
 
+  const tiles = [
+    dict.philosophy.cards.scalable.title,
+    dict.philosophy.cards.performance.title,
+    dict.philosophy.cards.cleanCode.title,
+  ];
+
   return (
-    <section className="max-w-7xl mx-auto px-8 py-24">
-      <div className="flex flex-col lg:flex-row items-center gap-16">
-        <div className="flex-1 space-y-8">
-          <motion.h1 {...fadeUp(0.2)} className="text-5xl font-bold tracking-tight text-foreground max-w-2xl leading-tight">
+    <section id="home">
+      {/* Scene */}
+      <motion.div {...fadeUp(0)} className="relative mb-11">
+        <div className="relative h-[520px] overflow-hidden rounded-[28px] bg-[#0B1630] sm:h-[580px] sm:rounded-[32px]">
+          <img
+            src="/img/hero-day.svg"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover dark:hidden"
+          />
+          <img
+            src="/img/hero-night.svg"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 hidden h-full w-full object-cover dark:block"
+          />
+        </div>
+
+        <Link
+          href={`/${lang}/projects`}
+          aria-label={dict.hero.viewProjects}
+          className="absolute -bottom-[70px] left-1/2 flex size-[148px] -translate-x-1/2 flex-col items-center justify-center gap-1.5 rounded-full border-[14px] border-background bg-accent text-[#14161F] transition-transform hover:scale-105"
+        >
+          <span className="text-xs font-semibold tracking-wide">{dict.hero.viewProjects}</span>
+          <ArrowUpRight className="h-6 w-6" strokeWidth={2} />
+        </Link>
+      </motion.div>
+
+      {/* Intro row */}
+      <div className="flex flex-wrap items-start gap-x-14 gap-y-12 px-3 pt-24 sm:pt-28">
+        <div className="flex min-w-0 flex-[1_1_340px] flex-col gap-6">
+          <motion.h1
+            {...fadeUp(0.2)}
+            className="max-w-2xl text-balance text-4xl leading-[1.02] sm:text-[58px]"
+          >
             {dict.hero.title}
           </motion.h1>
 
-          <motion.p {...fadeUp(0.3)} className="text-lg text-muted-foreground max-w-xl leading-relaxed">
+          <motion.p
+            {...fadeUp(0.3)}
+            className="max-w-[420px] text-[15px] leading-relaxed text-muted-foreground"
+          >
             {dict.hero.description}
           </motion.p>
 
-          <motion.div {...fadeUp(0.4)} className="flex items-center gap-4 pt-2">
-            <Button>
-              <Link href={`/${lang}/projects`} className="flex items-center gap-2">
-                {dict.hero.viewProjects}
-                <ArrowRight className="h-4 w-4" />
+          <motion.div {...fadeUp(0.4)} className="mt-2 flex flex-wrap items-center gap-3">
+            {SOCIAL_LINKS.map(({ href, label, icon }) => (
+              <Link
+                key={label}
+                href={href}
+                aria-label={label}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex size-[52px] items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              >
+                {icon}
               </Link>
-            </Button>
+            ))}
           </motion.div>
         </div>
 
         <motion.div
-          className="flex-1 relative"
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          {...fadeUp(0.4)}
+          className="grid min-w-0 flex-[1_1_340px] grid-cols-1 gap-3.5 sm:grid-cols-3"
         >
-          <div className="aspect-square w-full max-w-md mx-auto relative rounded-2xl overflow-hidden border border-border">
-            <img
-              src="/img/undraw_code-review_jdgp.svg"
-              alt="Avatar"
-              className="w-full h-full object-contain"
-            />
-            <div className="absolute inset-0 bg-gradient-to-tr from-background/40 via-transparent to-transparent" />
-          </div>
-
-          <motion.div
-            className="absolute -bottom-6 -left-6 p-6 rounded-xl bg-card backdrop-blur-md border border-border shadow-xl hidden md:block"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center text-primary">
-                <Code2 className="h-6 w-6" />
-              </div>
-              <div>
-                <div className="text-xs text-muted-foreground">{dict.hero.badge}</div>
-              </div>
-            </div>
-          </motion.div>
+          {tiles.map((label) => (
+            <Link
+              key={label}
+              href="#philosophy"
+              className="flex min-h-24 flex-col items-start justify-between gap-6 rounded-[28px] bg-card px-[18px] pb-4 pt-5 text-left transition-transform hover:-translate-y-0.5 sm:min-h-[140px]"
+            >
+              <span className="min-h-[34px] text-[13px] font-medium leading-snug">{label}</span>
+              <span className="flex size-[38px] items-center justify-center rounded-full bg-primary text-primary-foreground">
+                <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.4} />
+              </span>
+            </Link>
+          ))}
         </motion.div>
       </div>
     </section>

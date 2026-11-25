@@ -73,11 +73,21 @@
     }
   },
   "projects": {
-    "title": "Curated Projects",
+    "title": "Projects",
     "description": "A collection of technical solutions where architectural integrity meets pixel-perfect execution.",
     "comingSoon": {
       "title": "Projects in Progress",
       "description": "Currently working on some exciting projects. Check back soon or follow me on GitHub to stay updated."
+    },
+    "items": {
+      "nextTemplate": {
+        "title": "Next Template Dashboard",
+        "description": "A reusable dashboard starter built with Next.js, shadcn/ui and Tailwind CSS, with blue, green and purple themes and dark mode."
+      },
+      "grove": {
+        "title": "Habit Tracker Mobile App",
+        "description": "A habit tracker for mobile, built with React Native and Expo as a portfolio project."
+      }
     }
   }
 }

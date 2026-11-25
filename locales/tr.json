@@ -73,11 +73,21 @@
     }
   },
   "projects": {
-    "title": "Seçilmiş Projeler",
+    "title": "Projeler",
     "description": "Mimari bütünlüğün pixel-perfect execution ile buluştuğu teknik çözümlerin koleksiyonu.",
     "comingSoon": {
       "title": "Projeler Devam Ediyor",
       "description": "Şu anda heyecan verici projeler üzerinde çalışıyorum. Yakında tekrar kontrol edin veya  güncellemeler için beni GitHub'dan takip edin."
+    },
+    "items": {
+      "nextTemplate": {
+        "title": "Next Template Dashboard",
+        "description": "Next.js, shadcn/ui ve Tailwind CSS ile geliştirilmiş; mavi, yeşil ve mor temalar ile karanlık mod sunan, yeniden kullanılabilir bir dashboard başlangıç şablonu."
+      },
+      "grove": {
+        "title": "Alışkanlık Takip Mobil Uygulaması",
+        "description": "React Native ve Expo ile portfolyo projesi olarak geliştirdiğim mobil alışkanlık takip uygulaması."
+      }
     }
   }
 }

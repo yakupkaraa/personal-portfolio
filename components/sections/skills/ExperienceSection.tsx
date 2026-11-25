@@ -27,9 +27,9 @@ export function ExperienceSection({ lang }: ExperienceSectionProps) {
   ];
 
   return (
-    <section className="max-w-7xl mx-auto px-8 py-24">
+    <section className="px-3 py-16 sm:py-20">
       <motion.h2
-        className="text-4xl font-bold tracking-tight text-foreground mb-16 text-center"
+        className="mb-10 text-center text-4xl text-foreground sm:text-[44px]"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -38,27 +38,27 @@ export function ExperienceSection({ lang }: ExperienceSectionProps) {
         {dict.experience.title}
       </motion.h2>
 
-      <div className="flex flex-col items-center max-w-2xl mx-auto">
+      <div className="mx-auto flex max-w-[680px] flex-col items-center">
         {[...experiences].reverse().map(({ period, title, company, highlights }, index, arr) => (
           <div key={title} className="w-full">
             <motion.div
-              className="bg-card border border-border rounded-xl p-8 hover:border-primary transition-colors duration-300"
+              className="rounded-[28px] bg-card px-6 py-7 sm:px-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
             >
-              <span className="text-sm font-medium tracking-widest text-primary uppercase block mb-3">
+              <span className="mb-2.5 block text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
                 {period}
               </span>
-              <h3 className="text-2xl font-semibold text-foreground mb-1">{title}</h3>
-              <p className="text-secondary text-sm font-medium uppercase tracking-widest mb-6">
+              <h3 className="mb-2 text-2xl text-foreground">{title}</h3>
+              <p className="mb-5 text-xs font-semibold uppercase tracking-[0.1em] text-foreground">
                 {company}
               </p>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {highlights.map((highlight: string) => (
-                  <li key={highlight} className="flex items-start gap-3 text-muted-foreground">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
+                  <li key={highlight} className="flex items-start gap-3 text-[15px] leading-relaxed text-muted-foreground">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-foreground" />
                     {highlight}
                   </li>
                 ))}
@@ -67,13 +67,13 @@ export function ExperienceSection({ lang }: ExperienceSectionProps) {
 
             {index < arr.length - 1 && (
               <motion.div
-                className="flex justify-center py-4"
+                className="flex justify-center py-3.5"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.15 + 0.1 }}
               >
-                <ArrowUp className="h-6 w-6 text-primary" />
+                <span className="flex size-10 items-center justify-center rounded-full border border-border"><ArrowUp className="h-4 w-4" strokeWidth={2} /></span>
               </motion.div>
             )}
           </div>

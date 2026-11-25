@@ -13,19 +13,19 @@ export function PhilosophySection({ lang }: PhilosophySectionProps) {
 
   const cards = [
     {
-      icon: <Layers className="h-6 w-6 text-primary" />,
+      icon: <Layers className="h-6 w-6" strokeWidth={1.8} />,
       title: dict.philosophy.cards.scalable.title,
       description: dict.philosophy.cards.scalable.description,
-      colSpan: "md:col-span-2",
+      colSpan: "",
     },
     {
-      icon: <Zap className="h-6 w-6 text-primary" />,
+      icon: <Zap className="h-6 w-6" strokeWidth={1.8} />,
       title: dict.philosophy.cards.performance.title,
       description: dict.philosophy.cards.performance.description,
       colSpan: "",
     },
     {
-      icon: <FileCode className="h-6 w-6 text-primary" />,
+      icon: <FileCode className="h-6 w-6" strokeWidth={1.8} />,
       title: dict.philosophy.cards.cleanCode.title,
       description: dict.philosophy.cards.cleanCode.description,
       colSpan: "",
@@ -33,9 +33,9 @@ export function PhilosophySection({ lang }: PhilosophySectionProps) {
   ];
 
   return (
-    <section className="max-w-7xl mx-auto px-8 py-24">
+    <section id="philosophy" className="scroll-mt-24 px-3 py-16 sm:py-20">
       <motion.h2
-        className="text-4xl font-bold tracking-tight text-foreground mb-12"
+        className="mb-8 text-4xl text-foreground sm:text-[44px]"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -44,36 +44,36 @@ export function PhilosophySection({ lang }: PhilosophySectionProps) {
         {dict.philosophy.title}
       </motion.h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
         {cards.map(({ icon, title, description, colSpan }, index) => (
           <motion.div
             key={title}
-            className={`${colSpan} p-8 rounded-xl bg-card border border-border flex flex-col gap-6`}
+            className={`${colSpan} flex min-h-[260px] flex-col gap-[18px] rounded-[32px] bg-card p-8`}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center">
+            <div className="flex size-16 items-center justify-center rounded-full border border-border">
               {icon}
             </div>
-            <h3 className="text-2xl font-semibold text-foreground">{title}</h3>
-            <p className="text-muted-foreground">{description}</p>
+            <h3 className="text-2xl text-foreground">{title}</h3>
+            <p className="text-[15px] leading-relaxed text-muted-foreground">{description}</p>
           </motion.div>
         ))}
 
         <motion.div
-          className="md:col-span-2 p-1 rounded-xl bg-gradient-to-br from-primary/10 via-card to-secondary/10"
+          className="rounded-[32px] bg-card p-1.5 md:col-span-3"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <div className="bg-background rounded-lg p-8 h-full border border-border">
+          <div className="h-full rounded-[26px] bg-background p-8">
             <div className="flex items-center gap-2 mb-6">
-              <div className="w-3 h-3 rounded-full bg-destructive" />
-              <div className="w-3 h-3 rounded-full bg-secondary" />
-              <div className="w-3 h-3 rounded-full bg-primary" />
+              <div className="h-3 w-3 rounded-full bg-[#D9743A]" />
+              <div className="h-3 w-3 rounded-full bg-accent" />
+              <div className="h-3 w-3 rounded-full bg-[#5E78B0]" />
               <span className="ml-4 text-xs text-muted-foreground uppercase tracking-widest">
                 portfolio.config.ts
               </span>

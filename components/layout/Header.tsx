@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Home, Code2, LayoutGrid } from "lucide-react";
 import { Locale, getDictionary } from "@/lib/i18n";
 
 const ThemeToggle = dynamic(
@@ -30,6 +30,13 @@ export default function Header({ lang }: HeaderProps) {
     { href: `/${lang}/projects`, label: dict.header.projects },
   ];
 
+  const NAV_ICONS = [Home, Code2, LayoutGrid];
+
+  const switchLang = () => {
+    const newLang = lang === "en" ? "tr" : "en";
+    window.location.href = pathname.replace(`/${lang}`, `/${newLang}`);
+  };
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
@@ -37,60 +44,64 @@ export default function Header({ lang }: HeaderProps) {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full px-4 pt-4">
-      <div
-        style={{
-          backgroundColor: scrolled ? "hsl(var(--background))" : "transparent",
-          backdropFilter: scrolled ? "blur(15px)" : "none",
-        }}
-        className="max-w-7xl mx-auto border border-border rounded-2xl px-8 py-3 flex justify-between items-center transition-all duration-300 shadow-lg"
-      >
-        <Link href={`/${lang}`} className="text-xl font-bold tracking-tighter hover:opacity-80 transition-opacity">
-          Yakup Kara
-        </Link>
-
-        <nav className="hidden md:block">
-          <ul className="flex items-center gap-2">
-            {NAV_LINKS.map(({ href, label }) => (
-              <li key={href} className="relative">
-                <Link
-                  href={href}
-                  className={cn(
-                    "relative z-10 px-4 py-1.5 rounded-full transition-colors text-sm",
-                    pathname === href
-                      ? "text-primary font-semibold"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                  aria-current={pathname === href ? "page" : undefined}
-                >
-                  {pathname === href && (
-                    <motion.span
-                      layoutId="active-nav"
-                      className="absolute inset-0 bg-accent rounded-full"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  <span className="relative z-10">{label}</span>
-                </Link>
-              </li>
-            ))}
+    <header className="sticky top-3 z-50 h-0 md:relative md:top-0">
+      {/* Desktop: fixed vertical rail on the left */}
+      <aside className="fixed left-5 top-1/2 z-50 hidden h-[min(540px,80vh)] -translate-y-1/2 flex-col items-center rounded-full bg-[#FFFBF4]/95 px-2 py-4 shadow-lg ring-1 ring-[#14161F]/10 backdrop-blur dark:bg-[#1A2236]/90 dark:text-[#F4EFE8] dark:shadow-black/40 dark:ring-white/10 md:flex">
+        <nav className="flex flex-1 items-center">
+          <ul className="flex flex-col items-center gap-2">
+            {NAV_LINKS.map(({ href, label }, i) => {
+              const Icon = NAV_ICONS[i];
+              const active = pathname === href;
+              return (
+                <li key={href} className="group relative">
+                  <Link
+                    href={href}
+                    aria-label={label}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "flex size-11 items-center justify-center rounded-full text-[#14161F] transition-colors dark:text-[#F4EFE8]",
+                      active
+                        ? "bg-accent ring-2 ring-[#14161F] dark:text-[#14161F] dark:ring-[#F4EFE8]"
+                        : "hover:bg-[#14161F]/5 dark:hover:bg-white/10"
+                    )}
+                  >
+                    <Icon className="h-5 w-5" strokeWidth={1.8} />
+                  </Link>
+                  <span className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap rounded-full bg-[#14161F] px-3 py-1.5 text-xs font-medium text-[#FFFBF4] opacity-0 dark:bg-[#F4EFE8] dark:text-[#14161F] transition-opacity group-focus-within:opacity-100 group-hover:opacity-100">
+                    {label}
+                  </span>
+                </li>
+              );
+            })}
           </ul>
         </nav>
-
-        <div className="flex items-center gap-2">
-          {/* Language switcher - single button */}
+        <div className="flex flex-col items-center gap-2">
           <button
-            onClick={() => {
-              const newLang = lang === 'en' ? 'tr' : 'en';
-              window.location.href = pathname.replace(`/${lang}`, `/${newLang}`);
-            }}
-            className="px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            onClick={switchLang}
+            className="flex size-11 cursor-pointer items-center justify-center rounded-full text-sm font-semibold text-[#14161F] transition-colors hover:bg-[#14161F]/5 dark:text-[#F4EFE8] dark:hover:bg-white/10"
+          >
+            {lang === "en" ? "TR" : "EN"}
+          </button>
+          <ThemeToggle className="size-11 bg-transparent shadow-none ring-0 hover:bg-[#14161F]/5 dark:bg-transparent dark:text-[#F4EFE8] dark:hover:bg-white/10 sm:size-11" />
+        </div>
+      </aside>
+
+      <div
+        className={cn(
+          "absolute inset-x-3 top-3 sm:inset-x-5 sm:top-5 flex items-start justify-end gap-2 transition-all duration-300",
+          scrolled && "drop-shadow-lg"
+        )}
+      >
+        <div className="flex items-center gap-2 sm:gap-2.5 md:hidden">
+          <button
+            onClick={switchLang}
+            className="h-12 sm:h-14 rounded-full bg-[#FFFBF4] ring-1 ring-[#14161F]/10 shadow-sm px-4 sm:px-5 text-sm font-semibold text-[#14161F] transition-opacity hover:opacity-90 cursor-pointer"
           >
             {lang === 'en' ? 'TR' : 'EN'}
           </button>
           <ThemeToggle />
           <button
-            className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
+            className="flex size-12 items-center justify-center rounded-full bg-[#FFFBF4] ring-1 ring-[#14161F]/10 shadow-sm text-[#14161F] transition-opacity hover:opacity-90 cursor-pointer"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
@@ -106,19 +117,17 @@ export default function Header({ lang }: HeaderProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden max-w-7xl mx-auto mt-2 border border-border rounded-2xl shadow-lg overflow-hidden bg-background"
+            className="md:hidden absolute inset-x-3 top-[72px] sm:inset-x-5 sm:top-[88px] overflow-hidden rounded-3xl bg-[#FFFBF4] ring-1 ring-[#14161F]/10 shadow-sm shadow-xl"
           >
-            <ul className="flex flex-col p-4 gap-2">
+            <ul className="flex flex-col gap-1 p-3">
               {NAV_LINKS.map(({ href, label }) => (
                 <li key={href}>
                   <Link
                     href={href}
                     onClick={() => setMenuOpen(false)}
                     className={cn(
-                      "block px-4 py-2 rounded-full transition-colors text-sm",
-                      pathname === href
-                        ? "bg-accent text-primary font-semibold"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      "block rounded-full px-5 py-3 text-sm font-medium text-[#14161F] transition-colors",
+                      pathname === href ? "bg-accent" : "hover:bg-[#14161F]/5"
                     )}
                   >
                     {label}
