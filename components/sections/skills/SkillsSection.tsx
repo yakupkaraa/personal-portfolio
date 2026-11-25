@@ -1,7 +1,7 @@
 "use client";
 
 import { Code2, Palette, Wrench } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Locale, getDictionary } from "@/lib/i18n";
 
 const PILL =
@@ -55,7 +55,7 @@ export function SkillsSection({ lang }: SkillsSectionProps) {
   return (
     <section className="px-3 pb-16 pt-28 sm:pb-20">
       <div className="mb-12 max-w-3xl">
-        <motion.span
+        <m.span
           className="mb-4 block text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -63,8 +63,8 @@ export function SkillsSection({ lang }: SkillsSectionProps) {
           transition={{ duration: 0.5 }}
         >
           {dict.skills.badge}
-        </motion.span>
-        <motion.h1
+        </m.span>
+        <m.h1
           className="mb-6 text-balance text-4xl leading-[1.05] text-foreground sm:text-[44px]"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -72,8 +72,8 @@ export function SkillsSection({ lang }: SkillsSectionProps) {
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           {dict.skills.title}
-        </motion.h1>
-        <motion.p
+        </m.h1>
+        <m.p
           className="max-w-xl text-[15px] leading-relaxed text-muted-foreground"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -81,12 +81,12 @@ export function SkillsSection({ lang }: SkillsSectionProps) {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           {dict.skills.description}
-        </motion.p>
+        </m.p>
       </div>
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-4 lg:grid-cols-6">
         {skillCards.map(({ icon, title, description, skills, colSpan }, index) => (
-          <motion.div
+          <m.div
             key={title}
             className={`${colSpan} flex min-h-[280px] flex-col justify-between rounded-[32px] bg-card p-8`}
             initial={{ opacity: 0, y: 30 }}
@@ -113,10 +113,10 @@ export function SkillsSection({ lang }: SkillsSectionProps) {
                 </span>
               ))}
             </div>
-          </motion.div>
+          </m.div>
         ))}
 
-        <motion.div
+        <m.div
           className="rounded-[32px] bg-card p-8 md:col-span-4 lg:col-span-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -141,7 +141,7 @@ export function SkillsSection({ lang }: SkillsSectionProps) {
               ))}
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

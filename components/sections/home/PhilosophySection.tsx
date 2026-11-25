@@ -1,7 +1,7 @@
 "use client";
 
 import { Layers, Zap, FileCode } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Locale, getDictionary } from "@/lib/i18n";
 
 interface PhilosophySectionProps {
@@ -34,7 +34,7 @@ export function PhilosophySection({ lang }: PhilosophySectionProps) {
 
   return (
     <section id="philosophy" className="scroll-mt-24 px-3 py-16 sm:py-20">
-      <motion.h2
+      <m.h2
         className="mb-8 text-4xl text-foreground sm:text-[44px]"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -42,11 +42,11 @@ export function PhilosophySection({ lang }: PhilosophySectionProps) {
         transition={{ duration: 0.5 }}
       >
         {dict.philosophy.title}
-      </motion.h2>
+      </m.h2>
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
         {cards.map(({ icon, title, description, colSpan }, index) => (
-          <motion.div
+          <m.div
             key={title}
             className={`${colSpan} flex min-h-[260px] flex-col gap-[18px] rounded-[32px] bg-card p-8`}
             initial={{ opacity: 0, y: 30 }}
@@ -59,10 +59,10 @@ export function PhilosophySection({ lang }: PhilosophySectionProps) {
             </div>
             <h3 className="text-2xl text-foreground">{title}</h3>
             <p className="text-[15px] leading-relaxed text-muted-foreground">{description}</p>
-          </motion.div>
+          </m.div>
         ))}
 
-        <motion.div
+        <m.div
           className="rounded-[32px] bg-card p-1.5 md:col-span-3"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -94,7 +94,7 @@ export function PhilosophySection({ lang }: PhilosophySectionProps) {
               {"}"};
             </pre>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

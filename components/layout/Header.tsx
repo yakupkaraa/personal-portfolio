@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Menu, X, Home, Code2, LayoutGrid } from "lucide-react";
 import { Locale, getDictionary } from "@/lib/i18n";
@@ -112,7 +112,7 @@ export default function Header({ lang }: HeaderProps) {
 
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -135,7 +135,7 @@ export default function Header({ lang }: HeaderProps) {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>

@@ -2,7 +2,7 @@
 
 import { ArrowUpRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Locale, getDictionary } from "@/lib/i18n";
 
 interface ProjectsSectionProps {
@@ -36,7 +36,7 @@ export function ProjectsSection({ lang }: ProjectsSectionProps) {
   return (
     <section className="px-3 pb-16 pt-28 sm:pb-20">
       <div className="mb-10 max-w-2xl">
-        <motion.h1
+        <m.h1
           className="mb-3 text-4xl text-foreground sm:text-[44px]"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -44,8 +44,8 @@ export function ProjectsSection({ lang }: ProjectsSectionProps) {
           transition={{ duration: 0.5 }}
         >
           {dict.projects.title}
-        </motion.h1>
-        <motion.p
+        </m.h1>
+        <m.p
           className="max-w-xl text-[15px] leading-relaxed text-muted-foreground"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -53,12 +53,12 @@ export function ProjectsSection({ lang }: ProjectsSectionProps) {
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           {dict.projects.description}
-        </motion.p>
+        </m.p>
       </div>
 
       <div className="grid grid-cols-[repeat(auto-fit,minmax(min(420px,100%),1fr))] gap-5">
         {projects.map(({ title, description, tech, gradient, href, repo }, index) => (
-          <motion.article
+          <m.article
             key={title}
             className={`relative flex min-h-[340px] flex-col justify-end gap-3.5 overflow-hidden rounded-[32px] p-8 text-[#14161F] dark:text-[#FFFBF4] sm:min-h-[420px] ${gradient}`}
             initial={{ opacity: 0, y: 30 }}
@@ -104,7 +104,7 @@ export function ProjectsSection({ lang }: ProjectsSectionProps) {
                 </a>
               </div>
             </div>
-          </motion.article>
+          </m.article>
         ))}
       </div>
     </section>

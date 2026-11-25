@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUp } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Locale, getDictionary } from "@/lib/i18n";
 
 interface ExperienceSectionProps {
@@ -28,7 +28,7 @@ export function ExperienceSection({ lang }: ExperienceSectionProps) {
 
   return (
     <section className="px-3 py-16 sm:py-20">
-      <motion.h2
+      <m.h2
         className="mb-10 text-center text-4xl text-foreground sm:text-[44px]"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -36,12 +36,12 @@ export function ExperienceSection({ lang }: ExperienceSectionProps) {
         transition={{ duration: 0.5 }}
       >
         {dict.experience.title}
-      </motion.h2>
+      </m.h2>
 
       <div className="mx-auto flex max-w-[680px] flex-col items-center">
         {[...experiences].reverse().map(({ period, title, company, highlights }, index, arr) => (
           <div key={title} className="w-full">
-            <motion.div
+            <m.div
               className="rounded-[28px] bg-card px-6 py-7 sm:px-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -63,10 +63,10 @@ export function ExperienceSection({ lang }: ExperienceSectionProps) {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </m.div>
 
             {index < arr.length - 1 && (
-              <motion.div
+              <m.div
                 className="flex justify-center py-3.5"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -74,7 +74,7 @@ export function ExperienceSection({ lang }: ExperienceSectionProps) {
                 transition={{ duration: 0.3, delay: index * 0.15 + 0.1 }}
               >
                 <span className="flex size-10 items-center justify-center rounded-full border border-border"><ArrowUp className="h-4 w-4" strokeWidth={2} /></span>
-              </motion.div>
+              </m.div>
             )}
           </div>
         ))}

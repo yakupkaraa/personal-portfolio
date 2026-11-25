@@ -1,9 +1,10 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Locale, getDictionary } from "@/lib/i18n";
 
 const fadeUp = (delay: number) => ({
@@ -25,6 +26,21 @@ interface HeroSectionProps {
 export function HeroSection({ lang }: HeroSectionProps) {
   const dict = getDictionary(lang);
 
+  // The hero scene is a continuously animated SVG: only keep it mounted while
+  // it is on (or close to) the screen so it does not burn CPU further down the page.
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const [sceneVisible, setSceneVisible] = useState(true);
+  useEffect(() => {
+    const el = sceneRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setSceneVisible(entry.isIntersecting),
+      { rootMargin: "300px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   const tiles = [
     dict.philosophy.cards.scalable.title,
     dict.philosophy.cards.performance.title,
@@ -34,8 +50,13 @@ export function HeroSection({ lang }: HeroSectionProps) {
   return (
     <section id="home">
       {/* Scene */}
-      <motion.div {...fadeUp(0)} className="relative mb-11">
-        <div className="relative h-[520px] overflow-hidden rounded-[28px] bg-[#0B1630] sm:h-[580px] sm:rounded-[32px]">
+      <m.div {...fadeUp(0)} className="relative mb-11">
+        <div
+          ref={sceneRef}
+          className="relative h-[520px] overflow-hidden rounded-[28px] bg-[#0B1630] sm:h-[580px] sm:rounded-[32px]"
+        >
+          {sceneVisible && (
+            <>
           <img
             src="/img/hero-day.svg"
             alt=""
@@ -48,6 +69,8 @@ export function HeroSection({ lang }: HeroSectionProps) {
             aria-hidden="true"
             className="absolute inset-0 hidden h-full w-full object-cover dark:block"
           />
+            </>
+          )}
         </div>
 
         <Link
@@ -58,26 +81,26 @@ export function HeroSection({ lang }: HeroSectionProps) {
           <span className="text-xs font-semibold tracking-wide">{dict.hero.viewProjects}</span>
           <ArrowUpRight className="h-6 w-6" strokeWidth={2} />
         </Link>
-      </motion.div>
+      </m.div>
 
       {/* Intro row */}
       <div className="flex flex-wrap items-start gap-x-14 gap-y-12 px-3 pt-24 sm:pt-28">
         <div className="flex min-w-0 flex-[1_1_340px] flex-col gap-6">
-          <motion.h1
+          <m.h1
             {...fadeUp(0.2)}
             className="max-w-2xl text-balance text-4xl leading-[1.02] sm:text-[58px]"
           >
             {dict.hero.title}
-          </motion.h1>
+          </m.h1>
 
-          <motion.p
+          <m.p
             {...fadeUp(0.3)}
             className="max-w-[420px] text-[15px] leading-relaxed text-muted-foreground"
           >
             {dict.hero.description}
-          </motion.p>
+          </m.p>
 
-          <motion.div {...fadeUp(0.4)} className="mt-2 flex flex-wrap items-center gap-3">
+          <m.div {...fadeUp(0.4)} className="mt-2 flex flex-wrap items-center gap-3">
             {SOCIAL_LINKS.map(({ href, label, icon }) => (
               <Link
                 key={label}
@@ -90,10 +113,10 @@ export function HeroSection({ lang }: HeroSectionProps) {
                 {icon}
               </Link>
             ))}
-          </motion.div>
+          </m.div>
         </div>
 
-        <motion.div
+        <m.div
           {...fadeUp(0.4)}
           className="grid min-w-0 flex-[1_1_340px] grid-cols-1 gap-3.5 sm:grid-cols-3"
         >
@@ -109,7 +132,7 @@ export function HeroSection({ lang }: HeroSectionProps) {
               </span>
             </Link>
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );
