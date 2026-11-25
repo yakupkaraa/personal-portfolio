@@ -58,7 +58,7 @@ export default async function RootLayout({
                 src="/img/paper.svg"
                 alt=""
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 z-[5] h-full w-full rounded-[inherit] mix-blend-multiply dark:hidden"
+                className="pointer-events-none absolute inset-0 z-[5] h-full w-full rounded-[inherit] mix-blend-multiply hidden md:block dark:md:hidden"
               />
               <Header lang={lang as "en" | "tr"} />
               <main className="min-h-screen">{children}</main>
