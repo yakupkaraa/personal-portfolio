@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { MotionProvider } from "@/components/layout/MotionProvider";
 import { AmbientBackground } from "@/components/layout/AmbientBackground";
+import { Analytics } from "@vercel/analytics/next";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -62,6 +63,7 @@ export default async function RootLayout({
             </div>
           </MotionProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
