@@ -47,13 +47,13 @@ export default async function RootLayout({
               <div className="relative isolate mx-auto max-w-[1360px] rounded-[28px] bg-background p-3 sm:rounded-[44px] sm:p-6">
                 {/* Ambient background: warm glow + dust + orbits (light), stars (dark) */}
                 <AmbientBackground />
-                {/* Paper grain (desktop, light only). Static tile, no blend mode. */}
+                {/* Paper grain (light, large screens with a mouse only). Static tile, no blend mode. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/img/paper.svg"
                   alt=""
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 z-[5] hidden h-full w-full rounded-[inherit] md:block dark:md:hidden"
+                  className="pointer-events-none absolute inset-0 paper-overlay z-[5] h-full w-full rounded-[inherit]"
                 />
                 <Header lang={lang as "en" | "tr"} />
                 <main className="min-h-screen">{children}</main>

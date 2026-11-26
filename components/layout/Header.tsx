@@ -46,7 +46,7 @@ export default function Header({ lang }: HeaderProps) {
   return (
     <header className="sticky top-3 z-50 h-0 md:relative md:top-0">
       {/* Desktop: fixed vertical rail on the left */}
-      <aside className="fixed left-5 top-1/2 z-50 hidden h-[min(540px,80vh)] -translate-y-1/2 flex-col items-center rounded-full bg-[#FFFBF4]/95 px-2 py-4 shadow-lg ring-1 ring-[#14161F]/10 backdrop-blur dark:bg-[#1A2236]/90 dark:text-[#F4EFE8] dark:shadow-black/40 dark:ring-white/10 md:flex">
+      <aside className="fixed left-5 top-1/2 z-50 hidden h-[min(540px,80vh)] -translate-y-1/2 flex-col items-center rounded-full bg-[#FFFBF4]/95 px-2 py-4 shadow-lg ring-1 ring-[#14161F]/10 dark:bg-[#1A2236]/90 dark:text-[#F4EFE8] dark:shadow-black/40 dark:ring-white/10 md:flex">
         <nav className="flex flex-1 items-center">
           <ul className="flex flex-col items-center gap-2">
             {NAV_LINKS.map(({ href, label }, i) => {

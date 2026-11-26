@@ -138,3 +138,64 @@
     @apply font-sans;
   }
 }
+
+/* Ambient background particles: transform/opacity only, so they run on the compositor. */
+.ambient-dust,
+.ambient-star,
+.ambient-orbit {
+  position: absolute;
+  will-change: transform, opacity;
+}
+.ambient-dust {
+  border-radius: 9999px;
+  opacity: var(--a, 0.6);
+  animation: ambient-dust 22s linear infinite;
+}
+.ambient-star {
+  border-radius: 9999px;
+  background: #fff;
+  opacity: 0.5;
+  animation: ambient-twinkle 8s ease-in-out infinite;
+}
+.ambient-orbit {
+  width: 0;
+  height: 0;
+  animation: ambient-orbit 150s linear infinite;
+}
+.ambient-planet {
+  position: absolute;
+  border-radius: 9999px;
+  opacity: 0.9;
+}
+@keyframes ambient-dust {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  20%, 80% { opacity: var(--a, 0.6); }
+  100% { transform: translate3d(-16px, -130px, 0); opacity: 0; }
+}
+@keyframes ambient-twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.85; }
+}
+@keyframes ambient-orbit {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambient-dust,
+  .ambient-star,
+  .ambient-orbit {
+    animation: none;
+  }
+}
+
+/* Paper grain: only on large screens with a precise pointer (not phones/tablets). */
+.paper-overlay {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) and (min-width: 768px) {
+  .paper-overlay {
+    display: block;
+  }
+  .dark .paper-overlay {
+    display: none;
+  }
+}

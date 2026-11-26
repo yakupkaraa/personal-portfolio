@@ -2,9 +2,15 @@
 
 import { useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
-import { DUST, ORBITS, STARS, type PlanetGradient } from "@/lib/ambient-data";
+import { ORBITS, STARS, type PlanetGradient } from "@/lib/ambient-data";
 
-const FRAME_MS = 1000 / 30;
+// Only a handful of particles keep moving. They are plain DOM nodes animated with
+// transform/opacity (compositor only, no repaint). Everything else is painted once
+// on a canvas and never touched again.
+const MOVING_PLANETS = 3;
+const MOVING_STARS = 10;
+
+const PLANETS = ORBITS.flatMap((o) => o.planets.map((p) => ({ ...o, p })));
 
 const PLANET_STOPS: Record<PlanetGradient, [string, string, string]> = {
   op1: ["#FFF1DE", "#F0A25C", "#C8662B"],
@@ -12,11 +18,15 @@ const PLANET_STOPS: Record<PlanetGradient, [string, string, string]> = {
   op3: ["#FBE9D2", "#E8B27E", "#8F5530"],
 };
 
+const planetBackground = (r: number, grad: PlanetGradient) => {
+  const [a, b, c] = PLANET_STOPS[grad];
+  return `radial-gradient(circle ${(1.6 * r).toFixed(1)}px at 35% 30%, ${a} 0%, ${b} 60%, ${c} 100%)`;
+};
+
 /**
  * Decorative background: a viewport-sized layer that stays put while the page
- * scrolls (so only one screen is ever painted), with a static SVG underneath
- * and every moving particle (dust, orbiting planets, twinkling stars) drawn on
- * one canvas instead of hundreds of individually animated SVG nodes.
+ * scrolls, with a static SVG underneath, a canvas painted once for the resting
+ * particles and a few compositor-animated DOM particles on top.
  */
 export function AmbientBackground() {
   const { resolvedTheme } = useTheme();
@@ -29,25 +39,23 @@ export function AmbientBackground() {
     if (!ctx) return;
 
     const dark = resolvedTheme === "dark";
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const small = window.matchMedia("(max-width: 767px)").matches;
-    // Fewer particles on phones; the layer is dense enough that nobody notices.
     const keep = (n: number) => (small ? Math.ceil(n * 0.6) : n);
-    const dust = DUST.slice(0, keep(DUST.length));
-    const stars = STARS.slice(0, keep(STARS.length));
 
-    let w = 0;
-    let h = 0;
-    let raf = 0;
-    let last = 0;
-
-    const draw = (t: number) => {
+    const paint = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = rect.width;
+      const h = rect.height;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
 
       if (dark) {
         ctx.fillStyle = "#FFFFFF";
-        for (const [cx, cy, r, dur, delay] of stars) {
-          const p = (((t - delay) / dur) % 1 + 1) % 1;
+        for (const [cx, cy, r, dur, delay] of STARS.slice(MOVING_STARS, keep(STARS.length))) {
+          const p = (((-delay / dur) % 1) + 1) % 1;
           ctx.globalAlpha = 0.2 + 0.65 * ((1 - Math.cos(p * Math.PI * 2)) / 2);
           ctx.beginPath();
           ctx.arc((cx / 100) * w, (cy / 100) * h, r, 0, Math.PI * 2);
@@ -57,75 +65,37 @@ export function AmbientBackground() {
         return;
       }
 
-      for (const [cx, cy, r, color, alpha, dur, delay] of dust) {
-        const p = (((t - delay) / dur) % 1 + 1) % 1;
-        const fade = p < 0.2 ? p / 0.2 : p < 0.8 ? 1 : (1 - p) / 0.2;
-        ctx.globalAlpha = alpha * fade;
-        ctx.fillStyle = color;
+      for (const { ox, oy, p: [dx, dy, r, grad] } of PLANETS.slice(MOVING_PLANETS)) {
+        const x = (ox / 100) * w + dx;
+        const y = (oy / 100) * h + dy;
+        const g = ctx.createRadialGradient(x - r + 0.7 * r, y - r + 0.6 * r, 0, x - r + 0.7 * r, y - r + 0.6 * r, 1.6 * r);
+        const [a, b, c] = PLANET_STOPS[grad];
+        g.addColorStop(0, a);
+        g.addColorStop(0.6, b);
+        g.addColorStop(1, c);
+        ctx.globalAlpha = 0.9;
+        ctx.fillStyle = g;
         ctx.beginPath();
-        ctx.arc((cx / 100) * w - 16 * p, (cy / 100) * h - 130 * p, r, 0, Math.PI * 2);
+        ctx.arc(x, y, r, 0, Math.PI * 2);
         ctx.fill();
-      }
-
-      for (const { ox, oy, dur, dir, planets } of ORBITS) {
-        const angle = dir * ((t / dur) % 1) * Math.PI * 2;
-        const cos = Math.cos(angle);
-        const sin = Math.sin(angle);
-        const centerX = (ox / 100) * w;
-        const centerY = (oy / 100) * h;
-        for (const [dx, dy, r, grad] of planets) {
-          const x = centerX + dx * cos - dy * sin;
-          const y = centerY + dx * sin + dy * cos;
-          const g = ctx.createRadialGradient(
-            x - r + 0.35 * 2 * r,
-            y - r + 0.3 * 2 * r,
-            0,
-            x - r + 0.35 * 2 * r,
-            y - r + 0.3 * 2 * r,
-            0.8 * 2 * r
-          );
-          const [a, b, c] = PLANET_STOPS[grad];
-          g.addColorStop(0, a);
-          g.addColorStop(0.6, b);
-          g.addColorStop(1, c);
-          ctx.globalAlpha = 0.9;
-          ctx.fillStyle = g;
-          ctx.beginPath();
-          ctx.arc(x, y, r, 0, Math.PI * 2);
-          ctx.fill();
-        }
       }
       ctx.globalAlpha = 1;
     };
 
-    const frame = (ts: number) => {
-      raf = requestAnimationFrame(frame);
-      if (ts - last < FRAME_MS) return;
-      last = ts;
-      draw(ts / 1000);
-    };
-
-    const resize = () => {
-      const rect = canvas.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = rect.width;
-      h = rect.height;
-      canvas.width = Math.round(w * dpr);
-      canvas.height = Math.round(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      draw(performance.now() / 1000);
-    };
-
-    const observer = new ResizeObserver(resize);
+    // Repaint only when the size really changes (rotation, window resize).
+    let lastW = 0;
+    let lastH = 0;
+    const observer = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect;
+      if (Math.abs(width - lastW) < 1 && Math.abs(height - lastH) < 1) return;
+      lastW = width;
+      lastH = height;
+      paint();
+    });
     observer.observe(canvas);
-    resize();
-    if (!reduceMotion) raf = requestAnimationFrame(frame);
+    paint();
 
-    return () => {
-      cancelAnimationFrame(raf);
-      observer.disconnect();
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    };
+    return () => observer.disconnect();
   }, [resolvedTheme]);
 
   return (
@@ -140,6 +110,53 @@ export function AmbientBackground() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/img/bg-night.svg" alt="" className="absolute inset-0 hidden h-full w-full dark:block" />
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
+
+        {/* Light: a few orbiting planets (rings are in bg-day.svg) */}
+        <div className="absolute inset-0 dark:hidden">
+          {PLANETS.slice(0, MOVING_PLANETS).map(({ ox, oy, dur, dir, p: [dx, dy, r, grad] }, i) => (
+            <span
+              key={`p${i}`}
+              className="ambient-orbit"
+              style={{
+                left: `${ox}%`,
+                top: `${oy}%`,
+                animationDuration: `${dur}s`,
+                animationDirection: dir < 0 ? "reverse" : "normal",
+              }}
+            >
+              <span
+                className="ambient-planet"
+                style={{
+                  left: dx - r,
+                  top: dy - r,
+                  width: r * 2,
+                  height: r * 2,
+                  background: planetBackground(r, grad),
+                }}
+              />
+            </span>
+          ))}
+        </div>
+
+        {/* Dark: a few twinkling stars */}
+        <div className="absolute inset-0 hidden dark:block">
+          {STARS.slice(0, MOVING_STARS).map(([cx, cy, r, dur, delay], i) => (
+            <span
+              key={`s${i}`}
+              className="ambient-star"
+              style={{
+                left: `${cx}%`,
+                top: `${cy}%`,
+                width: r * 2,
+                height: r * 2,
+                marginLeft: -r,
+                marginTop: -r,
+                animationDuration: `${dur}s`,
+                animationDelay: `${delay}s`,
+              }}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

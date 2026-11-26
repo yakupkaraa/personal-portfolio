@@ -43,6 +43,7 @@
 @keyframes com1{0%{transform:translate(1200px,20px);opacity:0}2%{opacity:1}14%{transform:translate(620px,180px);opacity:0}100%{transform:translate(620px,180px);opacity:0}}
 .com1{opacity:0;animation:com1 26s linear 9s infinite}
 /* /LIGHT-FLYBY */
+@media (pointer:coarse){.sd1,.sd2,.sunpulse{animation:none !important}}
 </style>
 <defs>
 <linearGradient id="lsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEBD3"/><stop offset="1" stop-color="#F5BD8A"/></linearGradient>
@@ -61,7 +62,6 @@
 <g transform="rotate(-18 1040 110)"><path d="M990 110 A50 12 0 0 0 1090 110" fill="none" stroke="#5E78B0" stroke-width="5"/></g>
 </g>
 <!-- LIGHT-FLYBY -->
-<g class="sat1"><g><rect x="-34" y="-4" width="24" height="8" rx="1.5" fill="#5E78B0"/><path d="M-26 -4V4M-18 -4V4" stroke="#E3ECFA" stroke-width="1"/><rect x="10" y="-4" width="24" height="8" rx="1.5" fill="#5E78B0"/><path d="M18 -4V4M26 -4V4" stroke="#E3ECFA" stroke-width="1"/><rect x="-10" y="-7" width="20" height="14" rx="4" fill="#F4F1EC" stroke="#D9D4CC" stroke-width="1.5"/><path d="M0 -7V-16" stroke="#D9D4CC" stroke-width="1.5" stroke-linecap="round"/><circle cx="0" cy="-17" r="2.5" fill="#F2A862"/><circle cx="0" cy="0" r="3" fill="#14233F"/></g></g>
 <g class="com1"><line x1="0" y1="0" x2="130" y2="-37" stroke="url(#ctail)" stroke-width="5" stroke-linecap="round"/><circle r="4.5" fill="#FFFFFF"/><circle r="9" fill="#FFFFFF" opacity="0.35"/></g>
 <!-- /LIGHT-FLYBY -->
 <circle cx="150" cy="125" r="26" fill="url(#lpl2)"/>
